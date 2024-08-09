@@ -1,7 +1,7 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import Icon from "@/src/components/Icon";
 import { RootStackParamList } from "../../types/navigation";
 import { type Info } from "../../types/info";
 import { auth, db } from "../../config";
@@ -80,11 +80,8 @@ export const HomeScreen = ({ navigation }: Props) => {
       />
       {ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
         //新規インフォメーション作成
-        <FloatingButton
-          onPress={onPressCreate}
-          // style={{ right: "auto", bottom: 50 }}
-        >
-          <AntDesign name="addfile" size={20} />
+        <FloatingButton onPress={onPressCreate}>
+          <Icon name="addfile" size={25} color="white" />
         </FloatingButton>
       ) : null}
     </View>

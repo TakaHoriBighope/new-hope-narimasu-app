@@ -1,6 +1,7 @@
 import { Alert, View, TextInput, StyleSheet } from "react-native";
 import FloatingButton from "../../components/FloatingButton";
 import { FontAwesome6 } from "@expo/vector-icons";
+// import Icon from "@/src/components/Icon";
 import { useState, useEffect, useContext } from "react";
 import { doc, getDoc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../config";
@@ -99,9 +100,10 @@ export const InfoEditScreen = ({ navigation, route }: Props): JSX.Element => {
         onPress={() => {
           onPressEdit(id, info.desc);
         }}
-        bottomNum={30}
+        style={{ right: 30, bottom: 30 }}
       >
         <FontAwesome6 name="save" size={24} color="white" />
+        {/* <Icon name="save" size={24} color="white" /> */}
       </FloatingButton>
     </KeyboardAvoidingView>
   );

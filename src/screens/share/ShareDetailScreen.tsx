@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import FloatingButton from "../../components/FloatingButton";
-import { Entypo } from "@expo/vector-icons";
+import Icon from "@/src/components/Icon";
 import { auth, db } from "../../config";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
@@ -92,10 +92,6 @@ export const ShareDetailScreen = ({ navigation, route }: Props) => {
         {postSingle?.imgURL ? (
           <View style={styles.imageVertical}>
             <CoverImage url={postSingle?.imgURL} />
-            {/* <Image
-              style={styles.image}
-              source={{ uri: postSingle?.imgURL }}
-            ></Image> */}
           </View>
         ) : null}
         <View>
@@ -109,7 +105,7 @@ export const ShareDetailScreen = ({ navigation, route }: Props) => {
           }}
           style={{ top: 50, bottom: "auto" }}
         >
-          <Entypo name="edit" size={24} />
+          <Icon name="pencil" size={40} color="white" />
         </FloatingButton>
       ) : null}
     </View>

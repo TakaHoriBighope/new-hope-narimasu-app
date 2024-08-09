@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import FloatingButton from "../../components/FloatingButton";
-import { Entypo } from "@expo/vector-icons";
+import Icon from "@/src/components/Icon";
 import { auth, db } from "../../config";
 import { useContext, useEffect, useState } from "react";
 import { IconButton } from "../../components/IconButton";
@@ -90,10 +90,6 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
         {infoSingle?.imgURL ? (
           <View style={styles.imageVertical}>
             <CoverImage url={infoSingle?.imgURL} />
-            {/* <Image
-              style={styles.image}
-              source={{ uri: infoSingle?.imgURL }}
-            ></Image> */}
           </View>
         ) : null}
         <View>
@@ -107,7 +103,7 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
           }}
           style={{ top: 50, bottom: "auto" }}
         >
-          <Entypo name="edit" size={30} />
+          <Icon name="pencil" size={40} color="white" />
         </FloatingButton>
       ) : null}
     </View>

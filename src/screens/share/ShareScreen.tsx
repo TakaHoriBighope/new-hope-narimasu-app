@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, FlatList, Button } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import Icon from "@/src/components/Icon";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
 import { type Post } from "../../types/post";
@@ -18,16 +18,6 @@ type Props = {
 export const ShareScreen = ({ navigation }: Props) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const { user } = useContext(UserContext);
-
-  // useEffect(() => {
-  //   if (auth.currentUser === null) {
-  //     return;
-  //   }
-  //   navigation.setOptions({
-  //     headerTintColor: "#800",
-  //     title: "Share",
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (auth.currentUser === null) {
@@ -81,7 +71,8 @@ export const ShareScreen = ({ navigation }: Props) => {
         keyExtractor={(item, index) => index.toString()}
       />
       <FloatingButton onPress={onPressCreate}>
-        <AntDesign name="addfile" size={20} />
+        {/* <AntDesign name="addfile" size={20} /> */}
+        <Icon name="addfile" size={25} color="white" />
       </FloatingButton>
     </View>
   );

@@ -99,7 +99,7 @@ export const ShareEditScreen = ({ navigation, route }: Props): JSX.Element => {
         onPress={() => {
           onPressEdit(id, post.desc);
         }}
-        bottomNum={30}
+        style={{ right: 30, bottom: 30 }}
       >
         <FontAwesome6 name="save" size={24} color="white" />
       </FloatingButton>

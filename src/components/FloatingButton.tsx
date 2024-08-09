@@ -8,7 +8,6 @@ import {
 type Props = {
   children: JSX.Element;
   style?: ViewStyle;
-  // bottomNum?: number;
   onPress?: () => void;
 };
 
@@ -16,7 +15,8 @@ const FloatingButton = (props: Props): JSX.Element => {
   const { children, style, onPress } = props;
   return (
     <TouchableOpacity onPress={onPress} style={[styles.floatingButton, style]}>
-      <Text style={styles.floatingButtonLabel}>{children}</Text>
+      {/* <Text style={styles.floatingButtonLabel}>{children}</Text> */}
+      <Text>{children}</Text>
     </TouchableOpacity>
   );
 };
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 5, height: 8 },
     elevation: 8,
   },
-  floatingButtonLabel: {
-    color: "white",
-    fontSize: 18,
-    // fontWeight: 400,
-    lineHeight: 28,
-  },
+  // floatingButtonLabel: {
+  //   color: "white",
+  //   fontSize: 18,
+  //   // fontWeight: 400,
+  //   lineHeight: 28,
+  // },
 });
 
 export default FloatingButton;
