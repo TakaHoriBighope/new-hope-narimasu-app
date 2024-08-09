@@ -80,7 +80,10 @@ export const HomeScreen = ({ navigation }: Props) => {
       />
       {ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
         //新規インフォメーション作成
-        <FloatingButton onPress={onPressCreate} bottomNum={50}>
+        <FloatingButton
+          onPress={onPressCreate}
+          // style={{ right: "auto", bottom: 50 }}
+        >
           <AntDesign name="addfile" size={20} />
         </FloatingButton>
       ) : null}

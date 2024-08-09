@@ -8,17 +8,14 @@ import {
 type Props = {
   children: JSX.Element;
   style?: ViewStyle;
-  bottomNum?: number;
+  // bottomNum?: number;
   onPress?: () => void;
 };
 
 const FloatingButton = (props: Props): JSX.Element => {
-  const { children, style, bottomNum, onPress } = props;
+  const { children, style, onPress } = props;
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.floatingButton, style, { bottom: bottomNum }]}
-    >
+    <TouchableOpacity onPress={onPress} style={[styles.floatingButton, style]}>
       <Text style={styles.floatingButtonLabel}>{children}</Text>
     </TouchableOpacity>
   );
@@ -34,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     position: "absolute",
     right: 30,
-    // bottom: 30,
+    bottom: 50,
     shadowColor: "#000",
     shadowOpacity: 0.35,
     shadowRadius: 12,

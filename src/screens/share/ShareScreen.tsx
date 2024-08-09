@@ -80,7 +80,7 @@ export const ShareScreen = ({ navigation }: Props) => {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <FloatingButton onPress={onPressCreate} bottomNum={50}>
+      <FloatingButton onPress={onPressCreate}>
         <AntDesign name="addfile" size={20} />
       </FloatingButton>
     </View>

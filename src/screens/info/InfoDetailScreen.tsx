@@ -105,7 +105,7 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
           onPress={() => {
             onPressEdit(info.id);
           }}
-          style={{ top: 35, bottom: "auto" }}
+          style={{ top: 50, bottom: "auto" }}
         >
           <Entypo name="edit" size={30} />
         </FloatingButton>

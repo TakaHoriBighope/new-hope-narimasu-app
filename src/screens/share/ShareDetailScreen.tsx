@@ -107,9 +107,9 @@ export const ShareDetailScreen = ({ navigation, route }: Props) => {
           onPress={() => {
             onPressEdit(post.id);
           }}
-          style={{ top: 58, bottom: "auto" }}
+          style={{ top: 50, bottom: "auto" }}
         >
-          <Entypo name="edit" size={30} />
+          <Entypo name="edit" size={24} />
         </FloatingButton>
       ) : null}
     </View>
