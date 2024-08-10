@@ -31,6 +31,7 @@ export const TalkScreen = ({ navigation }: Props) => {
   const { user } = useContext(UserContext);
   const { channel } = useContext(ChannelContext);
   const [inputHeight, setInputHeight] = useState(0);
+  const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<Message>({
@@ -142,7 +143,8 @@ export const TalkScreen = ({ navigation }: Props) => {
       <ScrollView style={styles.container}>
         {channel?.channelName ? (
           channel?.channelProp === auth.currentUser?.uid ||
-          channel?.channelMember.includes(auth.currentUser?.uid ?? "") ? (
+          channel?.channelMember.includes(auth.currentUser?.uid ?? "") ||
+          ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
             messages.map((message, index) => (
               <MessageListItem message={message} key={index} />
             ))

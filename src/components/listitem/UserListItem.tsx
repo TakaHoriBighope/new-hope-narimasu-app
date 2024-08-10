@@ -31,8 +31,9 @@ const UserListItem = (props: Props): JSX.Element | null => {
   const { uid, profilePicture, username } = user;
   const { channel, setChannel } = useContext(ChannelContext);
   const { channelMems, setChannelMems } = useContext(ChannelMemContext);
+  const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
 
-  if (uid === channel?.channelProp) {
+  if (uid === channel?.channelProp || ADMIN?.includes(uid)) {
     return null;
   }
   useEffect(() => {

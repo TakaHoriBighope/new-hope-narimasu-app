@@ -25,6 +25,7 @@ export const ChannelDisplay = ({ id, channel }: Props) => {
   const [propName, setPropName] = useState<string>("");
   const { setChannel } = useContext(ChannelContext);
   const { setChannelMems } = useContext(ChannelMemContext);
+  const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
 
   const docRef = doc(db, "users", String(channelProp));
   useEffect(() => {
@@ -50,7 +51,8 @@ export const ChannelDisplay = ({ id, channel }: Props) => {
   return (
     <ScrollView style={styles.container}>
       {channel?.channelProp === auth.currentUser?.uid ||
-      channel?.channelMember.includes(auth.currentUser?.uid ?? "") ? (
+      channel?.channelMember.includes(auth.currentUser?.uid ?? "") ||
+      ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
         <TouchableOpacity
           onPress={() => {
             onPressShowMessage();
