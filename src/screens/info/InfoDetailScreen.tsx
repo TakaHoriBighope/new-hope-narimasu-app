@@ -103,7 +103,7 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
           }}
           style={{ top: 50, bottom: "auto" }}
         >
-          <Icon name="pencil" size={40} color="white" />
+          <Icon name="pencil" size={33} color="white" />
         </FloatingButton>
       ) : null}
     </View>

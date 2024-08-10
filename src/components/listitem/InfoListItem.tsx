@@ -87,7 +87,8 @@ export const InfoListItem = ({ info, onPress }: Props): JSX.Element | null => {
             ) : null}
             <Text style={styles.infoListItemDate}>{dateAry[0]}</Text>
           </View>
-          {user?.uid === uid && ADMIN?.includes(user?.uid) ? (
+          {/* {user?.uid === uid && ADMIN?.includes(user?.uid) ? ( */}
+          {ADMIN?.includes(user?.uid ?? "") ? (
             <View>
               <TouchableOpacity
                 style={styles.deleteIcon}
