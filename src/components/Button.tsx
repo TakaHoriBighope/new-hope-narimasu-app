@@ -21,8 +21,7 @@ export const Button: React.FC<Props> = ({ onPress, label }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#900",
-    // backgroundColor: "#467FD3",
+    backgroundColor: "#800",
     borderRadius: 6,
     alignSelf: "flex-start",
     marginBottom: 24,
