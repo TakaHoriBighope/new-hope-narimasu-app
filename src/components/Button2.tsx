@@ -11,14 +11,14 @@ export const Button2 = (props: Props): JSX.Element => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Text style={styles.text}>{label}</Text>
+      <Text style={styles.buttonLabel}>{label}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#900",
+    backgroundColor: "#800",
     height: 40,
     width: "40%",
     margin: 16,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  text: {
+  buttonLabel: {
     fontSize: 20,
     color: "#fff",
   },
