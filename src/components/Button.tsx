@@ -7,11 +7,13 @@ import {
 } from "react-native";
 
 type Props = {
-  onPress: (event: GestureResponderEvent) => void;
+  // onPress: (event: GestureResponderEvent) => void;
   label: string;
+  onPress?: () => void;
 };
 
-export const Button: React.FC<Props> = ({ onPress, label }: Props) => {
+export const Button = (props: Props): JSX.Element => {
+  const { label, onPress } = props;
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.buttonLabel}>{label}</Text>

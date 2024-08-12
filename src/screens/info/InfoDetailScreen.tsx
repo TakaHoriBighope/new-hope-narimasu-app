@@ -103,7 +103,7 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
           onPress={() => {
             onPressEdit(info.id);
           }}
-          style={{ top: 50, bottom: "auto" }}
+          style={{ position: "absolute", top: 50, right: 20 }}
         >
           <Icon name="pencil" size={33} color="white" />
         </FloatingButton>

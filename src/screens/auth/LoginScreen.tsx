@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { Button } from "../../components/Button";

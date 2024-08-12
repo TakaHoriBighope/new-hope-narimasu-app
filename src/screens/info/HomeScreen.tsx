@@ -80,7 +80,10 @@ export const HomeScreen = ({ navigation }: Props) => {
       />
       {ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
         //新規インフォメーション作成
-        <FloatingButton onPress={onPressCreate}>
+        <FloatingButton
+          onPress={onPressCreate}
+          style={{ position: "absolute", right: 30, bottom: 50 }}
+        >
           <Icon name="addfile" size={25} color="white" />
         </FloatingButton>
       ) : null}

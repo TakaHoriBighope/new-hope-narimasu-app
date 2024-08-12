@@ -70,7 +70,10 @@ export const ShareScreen = ({ navigation }: Props) => {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <FloatingButton onPress={onPressCreate}>
+      <FloatingButton
+        onPress={onPressCreate}
+        style={{ position: "absolute", right: 30, bottom: 50 }}
+      >
         {/* <AntDesign name="addfile" size={20} /> */}
         <Icon name="addfile" size={25} color="white" />
       </FloatingButton>
