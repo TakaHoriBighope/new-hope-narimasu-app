@@ -144,7 +144,7 @@ export const LoginScreen = ({ navigation }: Props): JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F0F4F8",
+    backgroundColor: "#e0d1d1",
   },
   titleContainer: {
     flexDirection: "row",
