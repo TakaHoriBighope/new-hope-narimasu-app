@@ -84,7 +84,7 @@ export const InfoEditScreen = ({ navigation, route }: Props): JSX.Element => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.textContainer}>
+      <View style={styles.inputContainer}>
         <TextInput
           multiline
           style={styles.input}
@@ -111,16 +111,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  textContainer: {
+  inputContainer: {
     flex: 1,
-    marginTop: 10,
-    paddingBottom: 60,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
   },
   input: {
     flex: 1,
     textAlignVertical: "top",
     fontSize: 16,
-    lineHeight: 24,
-    paddingHorizontal: 27,
+    lineHeight: 28,
   },
 });

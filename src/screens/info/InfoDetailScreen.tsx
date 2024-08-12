@@ -23,6 +23,7 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
   // const { setInfo } = useContext(InfoContext);
   const [infoSingle, setInfoSingle] = useState<Info | null>(null);
   const { user } = useContext(UserContext);
+  const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
 
   useEffect(() => {
     if (info.read.includes(user?.uid ?? "")) {
@@ -96,7 +97,8 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
           <Text style={styles.infoBodyText}>{infoSingle?.desc}</Text>
         </View>
       </ScrollView>
-      {auth.currentUser?.uid === infoSingle?.uid ? (
+      {ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
+        // {auth.currentUser?.uid === infoSingle?.uid ? (
         <FloatingButton
           onPress={() => {
             onPressEdit(info.id);
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   infoHeader: {
-    backgroundColor: "#993030",
+    backgroundColor: "#900",
     height: 70,
     justifyContent: "center",
     paddingVertical: 12,
@@ -144,10 +146,10 @@ const styles = StyleSheet.create({
   },
   infoBody: {},
   infoBodyText: {
-    paddingHorizontal: 20,
-    // paddingVertical: 32,
-    fontSize: 15,
-    lineHeight: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    fontSize: 16,
+    lineHeight: 28,
     color: "#000000",
   },
 });

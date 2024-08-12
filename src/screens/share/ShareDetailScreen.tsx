@@ -158,10 +158,10 @@ const styles = StyleSheet.create({
   },
   postBody: {},
   postBodyText: {
-    paddingHorizontal: 20,
-    // paddingVertical: 32,
-    fontSize: 15,
-    lineHeight: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    fontSize: 16,
+    lineHeight: 28,
     color: "#000000",
   },
 });
