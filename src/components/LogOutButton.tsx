@@ -1,14 +1,15 @@
 import { TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 import { getAuth, signOut } from "firebase/auth";
-import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
+import { UserContext } from "../contexts/userContext";
 
 const LogOutButton = (): JSX.Element => {
+  const { setUser } = useContext(UserContext);
   const handlePress = (): void => {
-    const navigation = useNavigation();
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        navigation.navigate("Login");
+        setUser(null);
       })
       .catch(() => {
         Alert.alert("Unabled Log Out!");
@@ -22,10 +23,10 @@ const LogOutButton = (): JSX.Element => {
 };
 const styles = StyleSheet.create({
   text: {
-    fontSize: 22,
-    lineHeight: 34,
-    margin: 15,
-    color: "rgba(0, 0, 0, 0.7)",
+    fontSize: 16,
+    lineHeight: 20,
+    margin: 8,
+    color: "rgba(155, 52, 52, 0.7)",
   },
 });
 export default LogOutButton;

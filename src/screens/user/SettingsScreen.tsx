@@ -1,5 +1,4 @@
 import {
-  Alert,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -18,7 +17,6 @@ import {
 import { db, auth } from "../../config";
 import { UserContext } from "@/src/contexts/userContext";
 import { Button2 } from "@/src/components/Button2";
-import { signOut } from "firebase/auth";
 import { Octicons } from "@expo/vector-icons";
 //画面遷移に必要
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -33,6 +31,7 @@ import {
 } from "firebase/storage";
 import { IconButton } from "@/src/components/IconButton";
 import { CoverProfilePicture } from "./CoverPrfilePicture";
+import LogOutButton from "@/src/components/LogOutButton";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "Settings">;
@@ -40,7 +39,7 @@ type Props = {
 
 export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
   const [text, setText] = useState<string>("");
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [imageURL, setImageURL] = useState<string>("");
   const [originalURL, setOriginalURL] = useState<string>("");
 
@@ -51,7 +50,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
       headerLeft: () => (
         <IconButton name="x" onPress={() => navigation.goBack()} size={24} />
       ),
-      headerRight: () => undefined,
+      headerRight: () => <LogOutButton />,
     });
     setOriginalURL(user?.profilePicture ?? "");
   }, []);
@@ -70,15 +69,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     }
     setText("");
     navigation.goBack();
-  };
-
-  const onPressLogout = (): void => {
-    signOut(auth)
-      .then(() => {})
-      .catch((error) => {
-        Alert.alert(`Unabled Log Out! ${error}`);
-      });
-    setUser(null);
   };
 
   const onPressProfilePicture = async () => {
@@ -143,9 +133,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     <ScrollView style={styles.container}>
       <View style={styles.boxContainer}>
         <Text style={styles.username}>User: {user?.username}</Text>
-        <TouchableOpacity onPress={onPressLogout} style={styles.separation}>
-          <Text style={styles.text}>Log out</Text>
-        </TouchableOpacity>
+        {/* <LogOutButton /> */}
         <Text style={styles.label}>Make Talk-Group-Name</Text>
         <Text style={styles.propText}>
           You are the proposer of the new group.
