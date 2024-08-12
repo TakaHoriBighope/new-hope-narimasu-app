@@ -69,35 +69,9 @@ export const LoginScreen = ({ navigation }: Props): JSX.Element => {
             });
           })
           .catch((error) => {
-            // Alert.alert("email address or passward invalid", "1", [
-            //   {
-            //     text: "Cancel",
-            //   },
-            //   {
-            //     text: "try agen?",
-            //     style: "destructive",
-            //     onPress: () => {
-            //       setEmail("");
-            //       setPassword("");
-            //     },
-            //   },
-            // ]);
             console.log("No such document at LoginScreen", error);
           });
       } else {
-        // Alert.alert("email address or passward invalid", "2", [
-        //   {
-        //     text: "Cancel",
-        //   },
-        //   {
-        //     text: "try agen?",
-        //     style: "destructive",
-        //     onPress: () => {
-        //       setEmail("");
-        //       setPassword("");
-        //     },
-        //   },
-        // ]);
         console.log("User is signed out");
       }
     });
