@@ -1,28 +1,23 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  GestureResponderEvent,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 type Props = {
-  onPress: (event: GestureResponderEvent) => void;
-  name?: string;
+  label: string;
   color?: string;
   size?: number;
+  onPress?: () => void;
 };
 
-export const HeaderButton: React.FC<Props> = ({
-  onPress,
-  name,
+export const HeaderButton = ({
+  label,
   color = "#800",
   size,
-}: Props) => {
+  onPress,
+}: Props): JSX.Element => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-      <AntDesign name={name} color={color} size={size} />
+      <AntDesign name={label} color={color} size={size} />
     </TouchableOpacity>
   );
 };

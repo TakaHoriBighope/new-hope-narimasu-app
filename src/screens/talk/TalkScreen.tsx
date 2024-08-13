@@ -51,7 +51,7 @@ export const TalkScreen = ({ navigation }: Props) => {
       headerLeft: () => undefined,
       headerRight: () => (
         <HeaderButton
-          name="addusergroup"
+          label="addusergroup"
           onPress={() => navigation.navigate("SelectGroup")}
           size={32}
         />
