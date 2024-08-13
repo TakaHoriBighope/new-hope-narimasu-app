@@ -99,7 +99,7 @@ export const InfoEditScreen = ({ navigation, route }: Props): JSX.Element => {
         onPress={() => {
           onPressEdit(id, info.desc);
         }}
-        style={{ right: 30, bottom: 30 }}
+        style={{ position: "absolute", right: 30, bottom: 10 }}
       >
         <FontAwesome6 name="save" size={24} color="white" />
       </FloatingButton>
