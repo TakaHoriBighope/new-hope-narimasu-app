@@ -1,22 +1,14 @@
 import { auth, db } from "@/src/config";
-import { User } from "@/src/types/user";
 import { Info } from "../types/info";
-import { initialUser } from "@/src/types/user";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 import {
   CollectionReference,
   DocumentData,
   Timestamp,
   collection,
   doc,
-  getDoc,
   getDocs,
   orderBy,
   query,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 
