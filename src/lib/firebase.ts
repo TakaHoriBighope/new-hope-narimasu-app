@@ -35,63 +35,59 @@ export const updateUser = async (userId: string, params: any) => {
   await updateDoc(userRef, { params }); // {name: "Taka"}
 };
 
-export const signin = async (email: string, password: string) => {
-  // const auth = getAuth();
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  // console.log("userCredential:", userCredential.user);
-  const { uid } = userCredential.user;
-  // console.log("uid at signin:", uid);
-  const docRef = doc(db, "users", uid);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    // console.log("Document data:", docSnap.data());
-    return {
-      id: uid,
-      ...docSnap.data(),
-    } as User;
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-    await setDoc(doc(db, "users", uid), {
-      name: "",
-      createdAt: Timestamp.fromDate(new Date()),
-      updatedAt: Timestamp.fromDate(new Date()),
-    });
-    return {
-      ...initialUser,
-      id: uid,
-    } as User;
-  }
-};
+// export const signin = async (email: string, password: string) => {
+//   // const auth = getAuth();
+//   const userCredential = await signInWithEmailAndPassword(
+//     auth,
+//     email,
+//     password
+//   );
+//   const { uid } = userCredential.user;
+//   const docRef = doc(db, "users", uid);
+//   const docSnap = await getDoc(docRef);
+//   if (docSnap.exists()) {
+//     return {
+//       id: uid,
+//       ...docSnap.data(),
+//     } as User;
+//   } else {
+//     console.log("No such document!");
+//     await setDoc(doc(db, "users", uid), {
+//       name: "",
+//       createdAt: Timestamp.fromDate(new Date()),
+//       updatedAt: Timestamp.fromDate(new Date()),
+//     });
+//     return {
+//       ...initialUser,
+//       id: uid,
+//     } as User;
+//   }
+// };
 
-export const signup = async (
-  email: string,
-  password: string,
-  username: string
-) => {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  const uid = userCredential.user.uid;
-  await setDoc(doc(db, "users", uid), {
-    email,
-    coverPicture: "",
-    profilePicture: "",
-    followes: [],
-    followings: [],
-    createdAt: Timestamp.fromDate(new Date()),
-    updatedAt: Timestamp.fromDate(new Date()),
-    salesTalk: "",
-    username,
-    uid,
-  });
-};
+// export const signup = async (
+//   email: string,
+//   password: string,
+//   username: string
+// ) => {
+//   const userCredential = await createUserWithEmailAndPassword(
+//     auth,
+//     email,
+//     password
+//   );
+//   const uid = userCredential.user.uid;
+//   await setDoc(doc(db, "users", uid), {
+//     email,
+//     coverPicture: "",
+//     profilePicture: "",
+//     followes: [],
+//     followings: [],
+//     createdAt: Timestamp.fromDate(new Date()),
+//     updatedAt: Timestamp.fromDate(new Date()),
+//     salesTalk: "",
+//     username,
+//     uid,
+//   });
+// };
 
 export const infoCreateRef = async (infoId: string) => {
   let collectionRef: CollectionReference<DocumentData> = collection(

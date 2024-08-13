@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { Button } from "../../components/Button";
@@ -14,9 +15,13 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 //画面遷移に必要
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { Timestamp, doc, getDoc } from "firebase/firestore";
-import { db } from "@/src/config";
+import { auth, db } from "@/src/config";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "Login">;
@@ -78,10 +83,16 @@ export const LoginScreen = ({ navigation }: Props): JSX.Element => {
 
   const onPressSubmit = async (email: string, password: string) => {
     //ログイン
-    const userCredential = await signin(email, password);
-    if (userCredential) {
-      navigation.navigate("Main");
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential.user.uid);
+        navigation.navigate("Main");
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        console.log(code, message);
+        Alert.alert(message);
+      });
   };
 
   const onPressSignUp = (): void => navigation.navigate("SignUp");

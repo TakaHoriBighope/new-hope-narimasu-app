@@ -56,7 +56,7 @@ export const SignUpScreen = ({ navigation }: Props): JSX.Element => {
     console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential.user.uid);
+        // console.log(userCredential.user.uid);
         setDoc(doc(db, "users", userCredential.user.uid), {
           email: email,
           coverPicture: "",
@@ -75,6 +75,7 @@ export const SignUpScreen = ({ navigation }: Props): JSX.Element => {
       .catch((error) => {
         const { code, message } = error;
         console.log(code, message);
+        Alert.alert(message);
       });
   };
 
