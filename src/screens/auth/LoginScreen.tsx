@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { Button } from "../../components/Button";
-import { signin } from "../../lib/firebase";
 import { UserContext } from "../../contexts/userContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 //画面遷移に必要

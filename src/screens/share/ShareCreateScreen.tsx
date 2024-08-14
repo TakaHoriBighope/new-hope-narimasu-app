@@ -238,7 +238,8 @@ export const ShareCreateScreen: React.FC<Props> = ({ navigation }: Props) => {
         onPress={() => {
           handlePress(post);
         }}
-        style={{ top: 10, bottom: "auto" }}
+        style={{ position: "absolute", right: 30, bottom: 30 }}
+        // style={{ top: 10, bottom: "auto" }}
         // bottomNum={150}
       >
         <FontAwesome6 name="save" size={20} color="white" />
