@@ -189,25 +189,15 @@ export const InfoCreateScreen: React.FC<Props> = ({ navigation }: Props) => {
           )}
           <ImageTextAlert />
         </View>
-        {/* <TextInputWithStyleChanged /> */}
         <TextInput
           placeholder="input text ....."
           multiline={true}
-          style={{
-            marginTop: 70,
-            flex: 1,
-            textAlignVertical: "top",
-            fontSize: 16,
-            lineHeight: 24,
-          }}
-          // style={styles.input}
+          style={styles.input}
           value={info.desc}
           onChangeText={(text) => {
-            // setDesc(text);
             setInfo({ ...info, desc: text, imgURL: imageURL });
           }}
           onContentSizeChange={(event) => {
-            // console.log(event.nativeEvent.contentSize);
             if (event.nativeEvent.contentSize.height >= 200) {
               scrollViewRef.current?.scrollTo({
                 x: 0,
@@ -242,6 +232,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
+    marginTop: 70,
     flex: 1,
     textAlignVertical: "top",
     fontSize: 16,

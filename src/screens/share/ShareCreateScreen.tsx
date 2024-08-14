@@ -210,13 +210,7 @@ export const ShareCreateScreen: React.FC<Props> = ({ navigation }: Props) => {
           placeholder="input text ....."
           multiline={true}
           // scrollEnabled={true}
-          style={{
-            marginTop: 70,
-            flex: 1,
-            textAlignVertical: "top",
-            fontSize: 16,
-            lineHeight: 24,
-          }}
+          style={styles.input}
           value={post.desc}
           onChangeText={(text) => {
             setPost({ ...post, desc: text, imgURL: imageURL });
@@ -257,6 +251,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
+    marginTop: 70,
     flex: 1,
     textAlignVertical: "top",
     fontSize: 16,
