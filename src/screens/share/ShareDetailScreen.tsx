@@ -138,12 +138,6 @@ const styles = StyleSheet.create({
   imageVertical: {
     paddingVertical: 5,
   },
-  image: {
-    width: "100%",
-    height: 300,
-    resizeMode: "contain",
-    // marginTop: 15,
-  },
   postTitle: {
     color: "white",
     fontSize: 15,

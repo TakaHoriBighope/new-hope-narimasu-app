@@ -127,11 +127,6 @@ const styles = StyleSheet.create({
   imageVertical: {
     paddingVertical: 5,
   },
-  image: {
-    width: "100%",
-    height: 300,
-    resizeMode: "contain",
-  },
   infoTitle: {
     color: "white",
     fontSize: 15,

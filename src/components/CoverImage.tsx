@@ -17,7 +17,7 @@ export const CoverImage = ({ url }: Props) => {
   }, []);
   return (
     <Image
-      source={{ url: url }}
+      source={{ uri: url }}
       resizeMode="cover"
       style={{ width: imageWidth, height: imageHeight }}
     ></Image>
