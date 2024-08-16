@@ -2,10 +2,10 @@ import { Alert, View, TextInput, StyleSheet } from "react-native";
 import FloatingButton from "../../components/FloatingButton";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
-import { doc, getDoc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../config";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
-import { Info } from "../../types/info";
+import { type Info } from "../../types/info";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
 import { RouteProp } from "@react-navigation/native";
@@ -19,7 +19,7 @@ type Props = {
 
 export const InfoEditScreen = ({ navigation, route }: Props): JSX.Element => {
   const { id } = route.params;
-  const { infos, setInfos } = useContext(InfosContext);
+  // const { infos, setInfos } = useContext(InfosContext);
   const [info, setInfo] = useState<Info>({
     id: "",
     desc: "",
@@ -78,7 +78,7 @@ export const InfoEditScreen = ({ navigation, route }: Props): JSX.Element => {
       })
       .catch((error) => {
         console.log(error);
-        Alert.alert("Failde to update!");
+        Alert.alert("Failed to update!");
       });
   };
 

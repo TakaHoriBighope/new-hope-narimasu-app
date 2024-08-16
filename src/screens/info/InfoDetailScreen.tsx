@@ -4,8 +4,7 @@ import Icon from "@/src/components/Icon";
 import { auth, db } from "../../config";
 import { useContext, useEffect, useState } from "react";
 import { IconButton } from "../../components/IconButton";
-import { Info } from "../../types/info";
-import { InfoContext } from "../../contexts/infoContext";
+import { type Info } from "../../types/info";
 import { arrayUnion, doc, onSnapshot, updateDoc } from "firebase/firestore";
 //画面遷移に必要
 import { StackNavigationProp } from "@react-navigation/stack";
