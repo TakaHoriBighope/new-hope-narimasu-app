@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   postListItemTitle: {
     fontSize: 14,
     lineHeight: 18,
-    fontWeight: 600,
+    fontWeight: "bold",
     color: "#322e2e",
   },
   postListItemDate: {
@@ -124,14 +124,12 @@ const styles = StyleSheet.create({
     color: "#292626",
     fontSize: 13,
     lineHeight: 13,
-    // fontWeight: 900,
     marginRight: 20,
   },
   itemContainer: {
     height: 100,
     width: "100%",
     flexDirection: "row",
-    // marginVertical: 3,
   },
   imageContainer: {
     width: 100,
@@ -161,6 +159,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 5,
     bottom: 12,
-    // paddingHorizontal: 1,
   },
 });

@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   infoListItemTitle: {
     fontSize: 14,
     lineHeight: 18,
-    fontWeight: 600,
+    fontWeight: "bold",
     color: "#322e2e",
   },
   infoListItemDate: {
@@ -162,6 +162,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 5,
     bottom: 12,
-    // paddingHorizontal: 1,
   },
 });

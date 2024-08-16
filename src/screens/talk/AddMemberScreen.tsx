@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   text: {
     margin: 10,
     fontSize: 20,
-    fontWeight: 600,
+    fontWeight: "bold",
     color: "#972752",
   },
   idText: {

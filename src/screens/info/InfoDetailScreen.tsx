@@ -136,13 +136,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
     lineHeight: 24,
-    fontWeight: 600,
+    fontWeight: "bold",
   },
   infoDate: {
     color: "white",
     fontSize: 12,
     lineHeight: 16,
-    fontWeight: 600,
+    fontWeight: "bold",
   },
   infoBody: {},
   infoBodyText: {
