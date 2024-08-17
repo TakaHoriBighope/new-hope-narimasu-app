@@ -130,7 +130,11 @@ export const LoginScreen = ({ navigation }: Props): JSX.Element => {
             passwordCheck(text);
           }}
         />
-        {!isValid && <div>There is an error in the input content.</div>}
+        {/* {!isValid && (
+          <text style={{ color: "red" }}>
+            There is an error in the input content.
+          </text>
+        )} */}
         <Button
           label="Submit"
           onPress={() => {

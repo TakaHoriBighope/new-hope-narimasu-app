@@ -127,7 +127,7 @@ export const SignUpScreen = ({ navigation }: Props): JSX.Element => {
             passwordCheck(text);
           }}
         />
-        {!isValid && <div>There is an error in the input content.</div>}
+        {/* {!isValid && <Text>There is an error in the input content.</Text>} */}
         <Button
           label="Submit"
           onPress={() => {
