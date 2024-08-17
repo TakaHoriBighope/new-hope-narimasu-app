@@ -209,10 +209,10 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.15)",
   },
   username: {
-    margin: 15,
+    marginTop: 20,
     marginLeft: 5,
     fontSize: 18,
-    lineHeight: 18,
+    lineHeight: 24,
   },
   input: {
     height: 40,
