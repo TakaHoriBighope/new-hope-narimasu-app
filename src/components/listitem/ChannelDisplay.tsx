@@ -50,43 +50,44 @@ export const ChannelDisplay = ({ id, channel }: Props) => {
 
   return (
     <ScrollView style={styles.container}>
-      {channel?.channelProp === auth.currentUser?.uid ||
-      channel?.channelMember.includes(auth.currentUser?.uid ?? "") ||
-      ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
-        <TouchableOpacity
-          onPress={() => {
-            onPressShowMessage();
-            setChannel(channel);
-          }}
-        >
-          <View style={styles.subContainer}>
-            <View style={styles.leftContainer}>
-              {channel?.channelProp === auth.currentUser?.uid ? (
-                <IconButton
-                  name="users"
-                  size={26}
-                  color="#1605fd"
-                  onPress={() => {
-                    onPressAddDelete(channel);
-                  }}
-                />
-              ) : null}
-            </View>
-            <View style={styles.rightContainer}>
-              <Text style={styles.nameText}>{channelName}</Text>
-              <Text style={styles.propText}>{propName}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      ) : (
-        <View style={styles.subContainer}>
-          <View style={styles.leftContainer} />
-          <View style={styles.rightContainer}>
-            <Text style={styles.grayText}>{channelName}</Text>
-            <Text style={styles.grayProp}>{propName}</Text>
-          </View>
+      <View style={styles.subContainer}>
+        <View style={styles.leftContainer}>
+          {channel?.channelProp === auth.currentUser?.uid ? (
+            <IconButton
+              name="users"
+              size={26}
+              color="#1605fd"
+              onPress={() => {
+                onPressAddDelete(channel);
+              }}
+            />
+          ) : null}
         </View>
-      )}
+        {channel?.channelProp === auth.currentUser?.uid ||
+        channel?.channelMember.includes(auth.currentUser?.uid ?? "") ||
+        ADMIN?.includes(auth.currentUser?.uid ?? "") ? (
+          <TouchableOpacity
+            onPress={() => {
+              onPressShowMessage();
+              setChannel(channel);
+            }}
+          >
+            <View style={styles.subContainer}>
+              <View style={styles.rightContainer}>
+                <Text style={styles.nameText}>{channelName}</Text>
+                <Text style={styles.propText}>{propName}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.subContainer}>
+            <View style={styles.rightContainer}>
+              <Text style={styles.grayText}>{channelName}</Text>
+              <Text style={styles.grayProp}>{propName}</Text>
+            </View>
+          </View>
+        )}
+      </View>
     </ScrollView>
   );
 };
@@ -98,13 +99,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   leftContainer: {
-    marginLeft: 15,
-    width: "15%",
+    marginLeft: 25,
+    width: "20%",
   },
   rightContainer: {
     paddingVertical: 8,
     paddingHorizontal: 16,
-    width: "85%",
+    width: "80%",
   },
   nameText: {
     color: "#000",
