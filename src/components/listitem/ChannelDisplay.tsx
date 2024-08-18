@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     marginLeft: 25,
-    width: "20%",
+    width: "13%",
   },
   rightContainer: {
     paddingVertical: 8,
     paddingHorizontal: 16,
-    width: "80%",
+    width: "87%",
   },
   nameText: {
     color: "#000",
