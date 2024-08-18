@@ -133,8 +133,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     <ScrollView style={styles.container}>
       <View style={styles.boxContainer}>
         <Text style={styles.username}>User: {user?.username}</Text>
-        {/* <LogOutButton /> */}
-        <Text style={styles.label}>Make Talk-Group-Name</Text>
+        <Text style={styles.label}>Create Talk-Group-Name</Text>
         <Text style={styles.propText}>
           You are the proposer of the new group.
         </Text>
