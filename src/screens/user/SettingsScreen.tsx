@@ -138,7 +138,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                   .catch((error) => {
                     console.log("No such document at LoginScreen", error);
                   });
-                setUser({ profilePicture });
                 //usersが即時反映するために
               })
               .catch((error) => {
