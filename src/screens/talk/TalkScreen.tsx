@@ -129,7 +129,15 @@ export const TalkScreen = ({ navigation }: Props) => {
       read: [],
     })
       .then((docRef) => {
-        setMessage("");
+        setMessage({
+          uid: "",
+          createdAt: Timestamp.fromDate(new Date()),
+          talk: "",
+          profilePicture: "",
+          email: "",
+          username: "",
+          read: [],
+        });
         // navigation.navigate("Talk");
       })
       .catch((error) => {

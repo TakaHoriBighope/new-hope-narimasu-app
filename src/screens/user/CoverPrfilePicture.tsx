@@ -3,10 +3,11 @@ import { Text, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { db, auth } from "../../config";
 import { UserContext } from "@/src/contexts/userContext";
-import { Channel } from "@/src/types/channel";
+import { type Channel } from "@/src/types/channel";
 import { doc, updateDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Button2 } from "@/src/components/Button2";
+import { type Message } from "@/src/types/message";
 
 // type Props = {
 //   url: string;
@@ -15,6 +16,7 @@ import { Button2 } from "@/src/components/Button2";
 export const CoverProfilePicture = () => {
   const { user, setUser } = useContext(UserContext);
   const [channels, setChannels] = useState<Channel[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   if (auth.currentUser === null) {
     return;
   }

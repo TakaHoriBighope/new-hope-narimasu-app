@@ -12,6 +12,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   updateDoc,
 } from "firebase/firestore";
 import { db, auth } from "../../config";
@@ -39,7 +40,7 @@ type Props = {
 
 export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
   const [text, setText] = useState<string>("");
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [imageURL, setImageURL] = useState<string>("");
   const [originalURL, setOriginalURL] = useState<string>("");
 
@@ -55,7 +56,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     setOriginalURL(user?.profilePicture ?? "");
   }, []);
 
-  const onSubmit = async () => {
+  const onSubmitCreateNewGroup = async () => {
     if (text) {
       const docRef = await addDoc(collection(db, "channels"), {
         channelName: text,
@@ -116,7 +117,28 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
               profilePicture: downloadURL,
               updatedAt: Timestamp.fromDate(new Date()),
             })
-              .then((docRef) => {
+              .then(() => {
+                const docRef = doc(db, "users", String(auth.currentUser?.uid));
+                getDoc(docRef)
+                  .then((docSnap) => {
+                    setUser({
+                      id: docSnap.data()?.id,
+                      email: docSnap.data()?.email,
+                      coverPicture: "",
+                      profilePicture: docSnap.data()?.profilePicture,
+                      followers: docSnap.data()?.followers,
+                      followings: docSnap.data()?.followings,
+                      createdAt: docSnap.data()?.createdAt,
+                      updatedAt: docSnap.data()?.updatedAt,
+                      salesTalk: docSnap.data()?.salesTalk,
+                      username: docSnap.data()?.username,
+                      uid: String(auth.currentUser?.uid),
+                    });
+                  })
+                  .catch((error) => {
+                    console.log("No such document at LoginScreen", error);
+                  });
+                setUser({ profilePicture });
                 //usersが即時反映するために
               })
               .catch((error) => {
@@ -125,7 +147,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           });
         }
       );
-      setImageURL("");
+      // setImageURL("");
     }
   };
 
@@ -133,6 +155,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     <ScrollView style={styles.container}>
       <View style={styles.boxContainer}>
         <Text style={styles.username}>User: {user?.username}</Text>
+        <Text style={styles.email}>{user?.email}</Text>
         <Text style={styles.label}>Create Talk-Group-Name</Text>
         <Text style={styles.propText}>
           You are the proposer of the new group.
@@ -145,16 +168,16 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           value={text}
           // autoFocus
         />
-
-        <Button2 onPress={onSubmit} label="save" />
+        <Button2 onPress={onSubmitCreateNewGroup} label="save" />
 
         <Text style={styles.label}>Change your Profile Picture</Text>
+        <Text style={styles.label}>Click green circle</Text>
         <View style={styles.photoContainer}>
           {user?.profilePicture ? (
             <TouchableOpacity
               onPress={() => {
-                setImageURL(imageURL);
                 onPressProfilePicture();
+                setImageURL(imageURL);
               }}
             >
               <Image
@@ -170,8 +193,8 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
               color="gray"
               style={styles.avatar}
               onPress={() => {
-                setImageURL(imageURL);
                 onPressProfilePicture();
+                setImageURL(imageURL);
               }}
             />
           )}
@@ -180,7 +203,10 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           )}
         </View>
         <Button2 onPress={onPressPhotoSave} label="save" />
-        {user?.profilePicture !== originalURL ? <CoverProfilePicture /> : null}
+        {/* <Image source={{ uri: imageURL }} /> */}
+        {/* {user?.profilePicture !== originalURL ? (
+          <Image source={{ uri: imageURL }} />
+        ) : null} */}
       </View>
     </ScrollView>
   );
@@ -212,6 +238,11 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 18,
     lineHeight: 24,
+  },
+  email: {
+    marginLeft: 5,
+    fontSize: 14,
+    lineHeight: 20,
   },
   input: {
     height: 40,
@@ -246,11 +277,12 @@ const styles = StyleSheet.create({
   image: {
     position: "absolute",
     marginTop: 10,
+    left: 2,
     width: 80,
     height: 80,
     borderRadius: 40,
     resizeMode: "cover",
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "green",
   },
   buffer: {
