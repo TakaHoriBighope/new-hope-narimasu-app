@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   postListItemTitle: {
     fontSize: 14,
     lineHeight: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#322e2e",
   },
   postListItemDate: {

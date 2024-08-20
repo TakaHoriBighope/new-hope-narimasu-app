@@ -257,13 +257,13 @@ const styles = StyleSheet.create({
   label: {
     marginTop: 10,
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#483c3c",
   },
   text: {
     fontSize: 18,
     lineHeight: 34,
-    fontWeight: "bold",
+    fontWeight: "600",
     margin: 10,
     color: "rgba(0, 0, 0, 0.7)",
   },

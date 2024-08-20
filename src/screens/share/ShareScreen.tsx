@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, StyleSheet, FlatList, Button } from "react-native";
 import Icon from "@/src/components/Icon";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
 import { type Post } from "../../types/post";
@@ -74,8 +75,8 @@ export const ShareScreen = ({ navigation }: Props) => {
         onPress={onPressCreate}
         style={{ position: "absolute", right: 30, bottom: 50 }}
       >
-        {/* <AntDesign name="addfile" size={20} /> */}
-        <Icon name="addfile" size={25} color="white" />
+        <AntDesign name="addfile" size={20} color="white" />
+        {/* <Icon name="addfile" size={25} color="white" /> */}
       </FloatingButton>
     </View>
   );

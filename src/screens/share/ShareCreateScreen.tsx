@@ -97,7 +97,7 @@ export const ShareCreateScreen: React.FC<Props> = ({ navigation }: Props) => {
     const { desc, imgURL, uid, likes, username, read } = post;
 
     if (!desc) {
-      Alert.alert("no text or photo.");
+      Alert.alert("cann't upload without text.");
       return;
     }
     setLoading(true);

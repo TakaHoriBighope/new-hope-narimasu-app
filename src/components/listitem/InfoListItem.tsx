@@ -13,6 +13,7 @@ import { auth, db } from "../../config";
 import { useContext } from "react";
 import { UserContext } from "@/src/contexts/userContext";
 import { InfosContext } from "@/src/contexts/infosContext";
+import { Platform } from "react-native";
 
 type Props = {
   info: Info;
@@ -22,6 +23,9 @@ type Props = {
 export const InfoListItem = ({ info, onPress }: Props): JSX.Element | null => {
   const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
   // const ADMIN2 = process.env.EXPO_PUBLIC_ADMIN_B;
+  const isIOS = Platform.OS === "ios";
+  // console.log(isIOS);
+  // expected output : iOSの場合`true`になる。Androidの場合`false`になる
 
   const { desc, createdAt, imgURL, uid, likes, read } = info;
 
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
   infoListItemTitle: {
     fontSize: 14,
     lineHeight: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#322e2e",
   },
   infoListItemDate: {
