@@ -86,20 +86,20 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 14,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#322e2e",
     // color: "black",
   },
   nameText: {
     fontSize: 12,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   dateText: {
     marginRight: 10,
     fontSize: 12,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   itemContainer: {
     width: "100%",

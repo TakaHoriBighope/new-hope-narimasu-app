@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   nameText: {
     color: "#000",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   propText: {
     color: "#432e2e",
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   grayText: {
     color: "#c3b5b5",
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   grayProp: {
     color: "#c3b5b5",

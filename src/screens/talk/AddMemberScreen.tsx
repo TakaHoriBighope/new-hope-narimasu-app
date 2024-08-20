@@ -94,11 +94,11 @@ const styles = StyleSheet.create({
   text: {
     margin: 10,
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#972752",
   },
   idText: {
     fontSize: 15,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
 });

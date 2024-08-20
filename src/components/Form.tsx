@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   label: {
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#999",
   },
 });

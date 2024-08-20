@@ -12,6 +12,8 @@ import { RootStackParamList } from "../../types/navigation";
 import { RouteProp } from "@react-navigation/native";
 import { UserContext } from "@/src/contexts/userContext";
 import { CoverImage } from "@/src/components/CoverImage";
+import { Platform } from "react-native";
+
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "InfoDetail">;
   route: RouteProp<RootStackParamList, "InfoDetail">;
@@ -23,6 +25,9 @@ export const InfoDetailScreen = ({ navigation, route }: Props) => {
   const [infoSingle, setInfoSingle] = useState<Info | null>(null);
   const { user } = useContext(UserContext);
   const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
+  const isIOS = Platform.OS === "ios";
+  // console.log(isIOS);
+  // expected output : iOSの場合`true`になる。Androidの場合`false`になる
 
   useEffect(() => {
     if (info.read.includes(user?.uid ?? "")) {
@@ -130,13 +135,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
     lineHeight: 24,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   infoDate: {
     color: "white",
     fontSize: 12,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   infoBody: {},
   infoBodyText: {

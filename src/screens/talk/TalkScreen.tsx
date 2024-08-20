@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 25,
     textAlign: "center",
-    fontWeight: "bold",
+    fontWeight: "600",
     color: "#800",
   },
   separator: {
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     marginTop: 70,
     fontSize: 23,
     lineHeight: 45,
-    fontWeight: "bold",
+    fontWeight: "600",
     alignItems: "center",
     textAlign: "center",
     color: "#800",

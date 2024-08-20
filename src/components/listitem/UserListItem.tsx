@@ -177,12 +177,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
     marginLeft: 15,
   },
   text2: {
     fontSize: 8,
-    fontWeight: "bold",
+    fontWeight: "600",
     marginLeft: 15,
   },
   button: {

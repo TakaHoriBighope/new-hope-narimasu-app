@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
     marginRight: 20,
   },
   imageVertical: {
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
     lineHeight: 24,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   postDate: {
     color: "white",
     fontSize: 12,
     lineHeight: 16,
-    fontWeight: "bold",
+    fontWeight: "600",
   },
   postBody: {},
   postBodyText: {
