@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   Platform,
+  Alert,
 } from "react-native";
 import { Text, View } from "react-native";
 import { useContext, useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import {
   doc,
   getDoc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db, auth } from "../../config";
 import {
@@ -172,35 +174,56 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     }
   };
 
-  const onPressDeleteAccount = () => {
+  const onPressDeleteAccount = (password: string) => {
     const auth = getAuth();
     const user = auth.currentUser;
+    const uid = auth.currentUser?.uid;
 
     // TODO(you): prompt the user to re-provide their sign-in credentials
-    const credential = EmailAuthProvider.credential(
-      auth.currentUser?.email ?? "",
-      password
-    );
-
-    reauthenticateWithCredential(user, credential)
-      .then(() => {
-        deleteUser(user)
-          .then(() => {
-            console.log("User deleted.");
-            // User deleted.
-          })
-          .catch((error) => {
-            // An error ocurred
-            const { code, message } = error;
-            console.log(code, message);
-          });
-        // User re-authenticated.
-      })
-      .catch((error) => {
-        // An error ocurred
-        const { code, message } = error;
-        console.log(code, message);
-      });
+    Alert.alert("Account deleted.", "Are you sure?", [
+      {
+        text: "Cancel",
+      },
+      {
+        text: "deleted!",
+        style: "destructive",
+        onPress: () => {
+          const credential = EmailAuthProvider.credential(
+            auth.currentUser?.email ?? "",
+            password
+          );
+          console.log("credential:", credential);
+          deleteDoc(doc(db, "users", String(uid)))
+            .then(() => {
+              reauthenticateWithCredential(user, credential)
+                .then(() => {
+                  deleteUser(user)
+                    .then(() => {
+                      console.log("User deleted.", uid);
+                      // User deleted.
+                      setUser(null);
+                    })
+                    .catch((error) => {
+                      // An error ocurred
+                      const { code, message } = error;
+                      console.log(code, message);
+                    });
+                  // User re-authenticated.
+                })
+                .catch((error) => {
+                  // An error ocurred
+                  const { code, message } = error;
+                  console.log(code, message);
+                });
+            })
+            .catch((error) => {
+              // An error ocurred
+              const { code, message } = error;
+              console.log(code, message);
+            });
+        },
+      },
+    ]);
   };
 
   return (
@@ -264,17 +287,20 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
             style={styles.passwordInput}
             value={password}
             maxLength={10}
-            placeholder="passoword"
+            placeholder="input your passoword..."
             autoCapitalize="none"
             secureTextEntry
             textContentType="password"
-            autoFocus
+            // autoFocus
             onChangeText={(text) => {
               setPassword(text);
               passwordCheck(text);
             }}
           />
-          <Button2 onPress={onPressDeleteAccount} label="   execution     " />
+          <Button2
+            onPress={() => onPressDeleteAccount(password)}
+            label="   execution     "
+          />
           {/* </View> */}
         </View>
       </KeyboardAvoidingView>
@@ -308,11 +334,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   passwordInput: {
-    borderWidth: 1,
-    borderColor: "#dddddd",
-    backgroundColor: "#ffffff",
+    // borderWidt1h: 1,
+    borderBottomWidth: 1,
+    borderColor: "#999",
+    // backgroundColor: "#ffffff",
     height: 36,
-    padding: 18,
+    // padding: 18,
     fontSize: 20,
     marginTop: 16,
   },
