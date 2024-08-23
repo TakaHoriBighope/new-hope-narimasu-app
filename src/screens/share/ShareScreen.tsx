@@ -75,8 +75,8 @@ export const ShareScreen = ({ navigation }: Props) => {
         onPress={onPressCreate}
         style={{ position: "absolute", right: 30, bottom: 50 }}
       >
-        <AntDesign name="addfile" size={20} color="white" />
-        {/* <Icon name="addfile" size={25} color="white" /> */}
+        {/* <AntDesign name="addfile" size={20} color="white" /> */}
+        <Icon name="addfile" size={25} color="white" />
       </FloatingButton>
     </View>
   );
