@@ -284,8 +284,8 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           {/* <View> */}
           <Text style={styles.label}>Account Deletion</Text>
           <TextInput
-            style={styles.passwordInput}
             value={password}
+            style={styles.passwordInput}
             maxLength={10}
             placeholder="input your passoword..."
             autoCapitalize="none"
@@ -334,14 +334,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   passwordInput: {
-    // borderWidt1h: 1,
     borderBottomWidth: 1,
     borderColor: "#999",
-    // backgroundColor: "#ffffff",
     height: 36,
-    // padding: 18,
+    padding: 18,
     fontSize: 20,
-    marginTop: 16,
+    // marginTop: 16,
   },
   propText: {
     fontSize: 14,
@@ -354,13 +352,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#483c3c",
   },
-  text: {
-    fontSize: 18,
-    lineHeight: 24,
-    fontWeight: "600",
-    margin: 5,
-    color: "rgba(0, 0, 0, 0.7)",
-  },
+  // text: {
+  //   fontSize: 18,
+  //   lineHeight: 24,
+  //   fontWeight: "600",
+  //   margin: 5,
+  //   color: "rgba(0, 0, 0, 0.7)",
+  // },
   photoContainer: {
     alignItems: "center",
   },
