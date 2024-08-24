@@ -17,6 +17,9 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
+  getCountFromServer,
+  getDocs,
+  arrayRemove,
 } from "firebase/firestore";
 import { db, auth } from "../../config";
 import {
@@ -44,6 +47,7 @@ import { CoverProfilePicture } from "./CoverPrfilePicture";
 import LogOutButton from "@/src/components/LogOutButton";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 import { Button } from "@/src/components/Button";
+import { type Channel } from "@/src/types/channel";
 // import KeyboardAvoidingView from "react-native";
 
 type Props = {
@@ -58,6 +62,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
   const [deletion, setDeletion] = useState<boolean>(false);
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [channels, setChannels] = useState<Channel[]>([]);
 
   const isIOS = Platform.OS === "ios";
 
@@ -188,11 +193,49 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
         text: "deleted!",
         style: "destructive",
         onPress: () => {
+          //emailを使ってcredentialを新規に得る、これをしないとaccount削除が出来ない
           const credential = EmailAuthProvider.credential(
             auth.currentUser?.email ?? "",
             password
           );
           console.log("credential:", credential);
+          //１．ます最初にchannelsのデータを取得
+          let channelsResult: Channel[] = [];
+          getDocs(collection(db, "channels"))
+            .then((snapshot) => {
+              snapshot.docs.forEach((doc) => {
+                const { channelName, channelProp, channelMember } =
+                  doc.data() as Channel;
+                channelsResult.push({
+                  channelId: doc.id,
+                  channelName,
+                  channelProp,
+                  channelMember,
+                });
+              });
+              setChannels(channelsResult);
+            })
+            .catch((error) => {
+              const { code, message } = error;
+              console.log(code, message);
+            });
+          //２．channels.channelMemberのuidを削除する
+          for (let i = 0; i < channels.length; i++) {
+            const groupOutDocRef = doc(
+              db,
+              "channels",
+              String(channels[i].channelId ?? "")
+            );
+            updateDoc(groupOutDocRef, { channelMember: arrayRemove(uid) })
+              .then(() => {
+                console.log(`deleted ${channels[i].channelName}:${uid}`);
+              })
+              .catch((error) => {
+                const { code, message } = error;
+                console.log(code, message);
+              });
+          }
+          //3．usersのuidを削除する
           deleteDoc(doc(db, "users", String(uid)))
             .then(() => {
               reauthenticateWithCredential(user, credential)
@@ -299,7 +342,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           />
           <Button2
             onPress={() => onPressDeleteAccount(password)}
-            label="   execution     "
+            label="    execute    "
           />
           {/* </View> */}
         </View>

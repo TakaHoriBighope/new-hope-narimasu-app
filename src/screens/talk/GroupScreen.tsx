@@ -47,7 +47,6 @@ export const GroupScreen = () => {
             key={channel.channelId}
           />
         ))}
-        {/* <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} /> */}
       </View>
     </ScrollView>
   );
