@@ -1,4 +1,5 @@
 /* eslint-disable  */
+import { Ionicons } from "@expo/vector-icons";
 import React, { useRef, useState, useEffect } from "react";
 import { Keyboard, Dimensions, Animated, Platform } from "react-native";
 
@@ -6,7 +7,15 @@ const KeyboardSafeView = ({ children, style }) => {
   const initialViewHeight = useRef(null);
   const animatedViewHeight = useRef(null);
   const [viewHeight, setViewHeight] = useState(null);
-  let num = 160; //80
+  const isIOS = Platform.OS === "ios";
+
+  if (isIOS) {
+    Show_num = 77;
+    Hide_num = 0;
+  } else {
+    Show_num = -35;
+    Hide_num = -5;
+  }
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener(
@@ -36,13 +45,13 @@ const KeyboardSafeView = ({ children, style }) => {
     if (viewHeight === initialViewHeight.current) {
       Animated.timing(animatedViewHeight.current, {
         toValue: initialViewHeight.current,
-        duration: 100,
+        duration: 300,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(animatedViewHeight.current, {
         toValue: viewHeight,
-        duration: 100,
+        duration: 300,
         useNativeDriver: false,
       }).start();
     }
@@ -52,13 +61,13 @@ const KeyboardSafeView = ({ children, style }) => {
     if (endCoordinates.height && initialViewHeight.current) {
       const keyboardHeight =
         Dimensions.get("window").height - endCoordinates.screenY;
-      setViewHeight(initialViewHeight.current - keyboardHeight - num); //80
+      setViewHeight(initialViewHeight.current - keyboardHeight + Show_num); //-80
     }
   };
 
   const handleHide = () => {
-    // setViewHeight(initialViewHeight.current - 80); //80
-    setViewHeight(initialViewHeight.current);
+    setViewHeight(initialViewHeight.current + Hide_num); //-80
+    // setViewHeight(initialViewHeight.current);
     // console.log("setViewHeigt2:", initialViewHeight.current - 80);
   };
 
