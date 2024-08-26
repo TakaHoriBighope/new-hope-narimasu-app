@@ -11,6 +11,7 @@ import { UserContext } from "../../contexts/userContext";
 import { PostListItem } from "../../components/listitem/PostListItem";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { signOut } from "firebase/auth";
+import { UsersContext } from "@/src/contexts/usersContext";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "Share">;
@@ -18,7 +19,7 @@ type Props = {
 
 export const ShareScreen = ({ navigation }: Props) => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const { user } = useContext(UserContext);
+  const { users } = useContext(UsersContext);
 
   useEffect(() => {
     if (auth.currentUser === null) {

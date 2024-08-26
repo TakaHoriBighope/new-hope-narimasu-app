@@ -14,6 +14,7 @@ import { auth, db } from "../../config";
 import { useContext } from "react";
 import { PostsContext } from "@/src/contexts/postContext";
 import { UserContext } from "@/src/contexts/userContext";
+import { UsersContext } from "@/src/contexts/usersContext";
 
 type Props = {
   post: Post;
@@ -24,10 +25,16 @@ export const PostListItem = ({ post, onPress }: Props): JSX.Element | null => {
   const { desc, createdAt, imgURL, uid } = post;
   const { posts, setPosts } = useContext(PostsContext);
   const { user } = useContext(UserContext);
+  const { users } = useContext(UsersContext);
 
   if (desc === null || createdAt === null) {
     return null;
   }
+  if (!users.includes(uid)) {
+    //アカウントを削除したUSERのShare投稿は表示しない
+    return null;
+  }
+
   const dateString = createdAt.toDate().toLocaleString("en-US");
   let dateAry = dateString.split(",");
 

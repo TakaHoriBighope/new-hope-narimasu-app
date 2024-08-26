@@ -4,13 +4,15 @@ import { View, StyleSheet, FlatList } from "react-native";
 import Icon from "@/src/components/Icon";
 import { RootStackParamList } from "../../types/navigation";
 import { type Info } from "../../types/info";
+import { type User } from "../../types/user";
 import { auth, db } from "../../config";
 import FloatingButton from "../../components/FloatingButton";
-import { UserContext } from "../../contexts/userContext";
+// import { UserContext } from "../../contexts/userContext";
 import { InfoListItem } from "../../components/listitem/InfoListItem";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { IconButton } from "@/src/components/IconButton";
+import { UsersContext } from "@/src/contexts/usersContext";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParamList, "Information">;
@@ -19,7 +21,7 @@ type Props = {
 export const HomeScreen = ({ navigation }: Props) => {
   const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
   const [infos, setInfos] = useState<Info[]>([]);
-  const { user } = useContext(UserContext);
+  const { setUsers } = useContext(UsersContext);
 
   useEffect(() => {
     if (auth.currentUser === null) {
@@ -60,6 +62,28 @@ export const HomeScreen = ({ navigation }: Props) => {
       unsubscribe(); // ← 追加
     };
   }, [signOut]);
+
+  useEffect(() => {
+    //ログインしているユーザーuidだけをcontextに
+    const ref = query(collection(db, "users"));
+    const unsubscribe = onSnapshot(
+      ref,
+      (snapshot) => {
+        const usersResults: string[] = [];
+        snapshot.forEach((doc) => {
+          // const { uid } = doc.data().uid;
+          usersResults.push(doc.data().uid);
+        });
+        setUsers(usersResults);
+      },
+      (error) => {
+        console.log("onSnapshot at AddMem", error);
+      }
+    );
+    return () => {
+      unsubscribe(); // ← 追加
+    };
+  }, []);
 
   const onPressInfo = (info: Info) => {
     navigation.navigate("InfoDetail", { info });

@@ -8,6 +8,7 @@ import { PostsContext } from "./src/contexts/postContext";
 import { ChannelContext } from "./src/contexts/channelContext";
 import { ChannelMemContext } from "./src/contexts/channelMemContext";
 import { MessageContext } from "./src/contexts/messageContext";
+import { UsersContext } from "./src/contexts/usersContext";
 import { type User } from "./src/types/user";
 import { type Info } from "./src/types/info";
 import { type Post } from "./src/types/post";
@@ -16,6 +17,7 @@ import { type Message } from "./src/types/message";
 import { LogBox } from "react-native";
 
 export default function App() {
+  const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User | null | undefined>();
   const [infos, setInfos] = useState<Info[]>([]);
   const [info, setInfo] = useState<Info | null | undefined>();
@@ -26,20 +28,22 @@ export default function App() {
   LogBox.ignoreAllLogs();
   // const [infoReadCount, setInfoReadCount] = useState<number>(0);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <MessageContext.Provider value={{ message, setMessage }}>
-        <ChannelMemContext.Provider value={{ channelMems, setChannelMems }}>
-          <ChannelContext.Provider value={{ channel, setChannel }}>
-            <InfosContext.Provider value={{ infos, setInfos }}>
-              <PostsContext.Provider value={{ posts, setPosts }}>
-                <InfoContext.Provider value={{ info, setInfo }}>
-                  <AppNavigator />
-                </InfoContext.Provider>
-              </PostsContext.Provider>
-            </InfosContext.Provider>
-          </ChannelContext.Provider>
-        </ChannelMemContext.Provider>
-      </MessageContext.Provider>
-    </UserContext.Provider>
+    <UsersContext.Provider value={{ users, setUsers }}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <MessageContext.Provider value={{ message, setMessage }}>
+          <ChannelMemContext.Provider value={{ channelMems, setChannelMems }}>
+            <ChannelContext.Provider value={{ channel, setChannel }}>
+              <InfosContext.Provider value={{ infos, setInfos }}>
+                <PostsContext.Provider value={{ posts, setPosts }}>
+                  <InfoContext.Provider value={{ info, setInfo }}>
+                    <AppNavigator />
+                  </InfoContext.Provider>
+                </PostsContext.Provider>
+              </InfosContext.Provider>
+            </ChannelContext.Provider>
+          </ChannelMemContext.Provider>
+        </MessageContext.Provider>
+      </UserContext.Provider>
+    </UsersContext.Provider>
   );
 }
