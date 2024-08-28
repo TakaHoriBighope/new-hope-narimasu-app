@@ -26,35 +26,35 @@ const MessageListItem = (props: Props): JSX.Element | null => {
 
   return (
     <>
-      {channel?.channelMember.includes(uid ?? "") ? (
-        <View style={styles.msgListItem}>
-          <View style={styles.itemContainer}>
-            <View style={styles.leftContainer}>
-              {profilePicture ? (
-                <Image
-                  style={styles.imageContainer}
-                  source={{ uri: profilePicture }}
-                  // contenFit="cover"
-                />
-              ) : (
-                <Octicons
-                  name="feed-person"
-                  size={36}
-                  color="lightgray"
-                  style={styles.avatar}
-                />
-              )}
+      {/* {channel?.channelMember.includes(uid ?? "") ? ( */}
+      <View style={styles.msgListItem}>
+        <View style={styles.itemContainer}>
+          <View style={styles.leftContainer}>
+            {profilePicture ? (
+              <Image
+                style={styles.imageContainer}
+                source={{ uri: profilePicture }}
+                // contenFit="cover"
+              />
+            ) : (
+              <Octicons
+                name="feed-person"
+                size={36}
+                color="lightgray"
+                style={styles.avatar}
+              />
+            )}
+          </View>
+          <View style={styles.rightContainer}>
+            <View style={styles.message}>
+              <Text style={styles.nameText}>{username}</Text>
+              <Text style={styles.dateText}>{dateAry[0]}</Text>
             </View>
-            <View style={styles.rightContainer}>
-              <View style={styles.message}>
-                <Text style={styles.nameText}>{username}</Text>
-                <Text style={styles.dateText}>{dateAry[0]}</Text>
-              </View>
-              <Text style={styles.messageText}>{talk}</Text>
-            </View>
+            <Text style={styles.messageText}>{talk}</Text>
           </View>
         </View>
-      ) : null}
+      </View>
+      {/* ) : null} */}
     </>
   );
 };

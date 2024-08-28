@@ -13,6 +13,8 @@ const KeyboardSafeView = ({ children, style }) => {
     Show_num = 77;
     Hide_num = 0;
   } else {
+    // Show_num = -80;
+    // Hide_num = -80;
     Show_num = -35;
     Hide_num = -5;
   }

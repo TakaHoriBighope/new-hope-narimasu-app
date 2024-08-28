@@ -298,7 +298,8 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     setIsShow(true);
     // console.log("onContentSizeChange");
   };
-
+  //Androidでは<KeyboardAvoidingView></KeyboardAvoidingView>でラップしない
+  //SettingsScreenが正常に表示しない
   return (
     <ScrollView keyboardDismissMode="on-drag">
       <KeyboardAvoidingView style={styles.container}>
@@ -330,9 +331,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                   onPressProfilePicture();
                   setImageURL(imageURL);
                 }}
-                // onContentSizeChange={() => {
-                //   onContentSizeChange();
-                // }}
               />
             )}
             {!!imageURL && (
@@ -341,7 +339,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
             <Text style={styles.label}>Change your Profile Picture?</Text>
             <Text style={styles.subText}>Click green circle.</Text>
           </View>
-          {/* <Button2 onPress={onPressPhotoSave} label="save" /> */}
           <View>
             {!!imageURL ? (
               <FloatingButton
@@ -366,9 +363,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
             onContentSizeChange={() => {
               onContentSizeChange();
             }}
-            // autoFocus
           />
-          {/* <Button2 onPress={onSubmitCreateNewGroup} label="save" /> */}
           <View>
             {!!groupName ? (
               <FloatingButton
@@ -408,10 +403,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                 <AntDesign name="enter" size={20} color="white" />
               </FloatingButton>
             ) : null}
-            {/* <Button2
-              onPress={() => onPressDeleteAccount(password)}
-              label="    execute    "
-                /> */}
           </View>
         </View>
         <Loading visible={loading} />

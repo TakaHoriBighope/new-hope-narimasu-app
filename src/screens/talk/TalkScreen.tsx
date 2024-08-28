@@ -73,7 +73,7 @@ export const TalkScreen = ({ navigation }: Props) => {
     const unsubscribe = onSnapshot(
       collectionRefOrderBy,
       (snapshot) => {
-        let results: Message[] = [];
+        const results: Message[] = [];
         snapshot.docs.forEach((doc) => {
           const {
             talk,
@@ -128,7 +128,7 @@ export const TalkScreen = ({ navigation }: Props) => {
       profilePicture: user?.profilePicture,
       read: [],
     })
-      .then((docRef) => {
+      .then(() => {
         setMessage({
           uid: "",
           createdAt: Timestamp.fromDate(new Date()),
