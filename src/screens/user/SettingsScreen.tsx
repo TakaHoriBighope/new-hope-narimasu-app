@@ -48,6 +48,11 @@ import LogOutButton from "@/src/components/LogOutButton";
 import KeyboardAvoidingView from "../../components/KeyboardAvoidingView";
 import { Button } from "@/src/components/Button";
 import { type Channel } from "@/src/types/channel";
+import { type User } from "../../types/user";
+import FloatingButton from "@/src/components/FloatingButton";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Loading } from "@/src/components/Loading";
+
 // import KeyboardAvoidingView from "react-native";
 
 type Props = {
@@ -63,13 +68,15 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [channels, setChannels] = useState<Channel[]>([]);
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const isIOS = Platform.OS === "ios";
 
   const passwordCheck = (newText: string) => {
     const regex = /^[a-zA-Z0-9]+$/;
     const isValid = regex.test(newText);
-    setIsValid(isValid);
+    setIsValid(false);
   };
 
   useEffect(() => {
@@ -112,6 +119,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     if (auth.currentUser === null) {
       return;
     }
+    setLoading(true);
     if (imageURL) {
       //document-IDを先に取得
       const userDocRef = doc(db, "users", String(auth.currentUser.uid));
@@ -142,6 +150,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
               "users",
               String(auth.currentUser?.uid)
             );
+
             updateDoc(userUpdateRef, {
               profilePicture: downloadURL,
               updatedAt: Timestamp.fromDate(new Date()),
@@ -150,17 +159,28 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                 const docRef = doc(db, "users", String(auth.currentUser?.uid));
                 getDoc(docRef)
                   .then((docSnap) => {
+                    const {
+                      email,
+                      coverPicture,
+                      createdAt,
+                      followers,
+                      followings,
+                      profilePicture,
+                      salesTalk,
+                      updatedAt,
+                      username,
+                    } = docSnap.data() as User;
                     setUser({
                       id: docSnap.data()?.id,
-                      email: docSnap.data()?.email,
-                      coverPicture: "",
-                      profilePicture: docSnap.data()?.profilePicture,
-                      followers: docSnap.data()?.followers,
-                      followings: docSnap.data()?.followings,
-                      createdAt: docSnap.data()?.createdAt,
-                      updatedAt: docSnap.data()?.updatedAt,
-                      salesTalk: docSnap.data()?.salesTalk,
-                      username: docSnap.data()?.username,
+                      email,
+                      coverPicture,
+                      profilePicture,
+                      followers,
+                      followings,
+                      createdAt,
+                      updatedAt,
+                      salesTalk,
+                      username,
                       uid: String(auth.currentUser?.uid),
                     });
                   })
@@ -175,7 +195,9 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           });
         }
       );
-      // setImageURL("");
+      setLoading(false);
+      setIsShow(false);
+      setImageURL("");
     }
   };
 
@@ -184,7 +206,6 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
     const user = auth.currentUser;
     const uid = auth.currentUser?.uid;
 
-    // TODO(you): prompt the user to re-provide their sign-in credentials
     Alert.alert("Account deleted.", "Are you sure?", [
       {
         text: "Cancel",
@@ -198,6 +219,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
             auth.currentUser?.email ?? "",
             password
           );
+          setLoading(true);
           console.log("credential:", credential);
           //１．ます最初にchannelsのデータを取得
           let channelsResult: Channel[] = [];
@@ -238,26 +260,28 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
           //3．usersのuidを削除する
           deleteDoc(doc(db, "users", String(uid)))
             .then(() => {
-              reauthenticateWithCredential(user, credential)
-                .then(() => {
-                  deleteUser(user)
-                    .then(() => {
-                      console.log("User deleted.", uid);
-                      // User deleted.
-                      setUser(null);
-                    })
-                    .catch((error) => {
-                      // An error ocurred
-                      const { code, message } = error;
-                      console.log(code, message);
-                    });
-                  // User re-authenticated.
-                })
-                .catch((error) => {
-                  // An error ocurred
-                  const { code, message } = error;
-                  console.log(code, message);
-                });
+              if (user) {
+                reauthenticateWithCredential(user, credential)
+                  .then(() => {
+                    deleteUser(user)
+                      .then(() => {
+                        console.log("User deleted.", uid);
+                        // User deleted.
+                        setUser(null);
+                      })
+                      .catch((error) => {
+                        // An error ocurred
+                        const { code, message } = error;
+                        console.log(code, message);
+                      });
+                    // User re-authenticated.
+                  })
+                  .catch((error) => {
+                    // An error ocurred
+                    const { code, message } = error;
+                    console.log(code, message);
+                  });
+              }
             })
             .catch((error) => {
               // An error ocurred
@@ -267,6 +291,12 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
         },
       },
     ]);
+    setLoading(false);
+  };
+
+  const onContentSizeChange = () => {
+    setIsShow(true);
+    // console.log("onContentSizeChange");
   };
 
   return (
@@ -300,37 +330,63 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                   onPressProfilePicture();
                   setImageURL(imageURL);
                 }}
+                // onContentSizeChange={() => {
+                //   onContentSizeChange();
+                // }}
               />
             )}
             {!!imageURL && (
               <Image source={{ uri: imageURL }} style={styles.image} />
             )}
             <Text style={styles.label}>Change your Profile Picture?</Text>
-            <Text style={styles.label}>Click green circle.</Text>
+            <Text style={styles.subText}>Click green circle.</Text>
           </View>
-          <Button2 onPress={onPressPhotoSave} label="save" />
+          {/* <Button2 onPress={onPressPhotoSave} label="save" /> */}
+          <View>
+            {!!imageURL ? (
+              <FloatingButton
+                onPress={onPressPhotoSave}
+                style={{ position: "absolute", right: -150, top: -140 }}
+              >
+                <AntDesign name="save" size={20} color="white" />
+              </FloatingButton>
+            ) : null}
+          </View>
 
           <Text style={styles.label}>Create Talk-Group-Name</Text>
-          <Text style={styles.propText}>
+          <Text style={styles.subText}>
             You are the proposer of the new group.
           </Text>
           <TextInput
             value={groupName}
             style={styles.input}
             numberOfLines={1}
-            placeholder="  input new group name..."
+            placeholder="input new group name"
             onChangeText={(text) => setGroupName(text)}
+            onContentSizeChange={() => {
+              onContentSizeChange();
+            }}
             // autoFocus
           />
-          <Button2 onPress={onSubmitCreateNewGroup} label="save" />
-
-          {/* <View> */}
+          {/* <Button2 onPress={onSubmitCreateNewGroup} label="save" /> */}
+          <View>
+            {!!groupName ? (
+              <FloatingButton
+                onPress={onSubmitCreateNewGroup}
+                // label="save"
+                style={{ position: "absolute", right: -150, bottom: 5 }}
+              >
+                <AntDesign name="save" size={20} color="white" />
+              </FloatingButton>
+            ) : null}
+          </View>
           <Text style={styles.label}>Account Deletion</Text>
           <TextInput
             value={password}
-            style={styles.passwordInput}
-            maxLength={10}
-            placeholder="input your passoword..."
+            style={styles.input}
+            numberOfLines={1}
+            // maxLength={10}
+            placeholder="input your passoword"
             autoCapitalize="none"
             secureTextEntry
             textContentType="password"
@@ -339,13 +395,26 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
               setPassword(text);
               passwordCheck(text);
             }}
+            onContentSizeChange={() => {
+              onContentSizeChange();
+            }}
           />
-          <Button2
-            onPress={() => onPressDeleteAccount(password)}
-            label="    execute    "
-          />
-          {/* </View> */}
+          <View>
+            {!!password ? (
+              <FloatingButton
+                onPress={() => onPressDeleteAccount(password)}
+                style={{ position: "absolute", right: -150, bottom: 20 }}
+              >
+                <AntDesign name="enter" size={20} color="white" />
+              </FloatingButton>
+            ) : null}
+            {/* <Button2
+              onPress={() => onPressDeleteAccount(password)}
+              label="    execute    "
+                /> */}
+          </View>
         </View>
+        <Loading visible={loading} />
       </KeyboardAvoidingView>
     </ScrollView>
   );
@@ -376,21 +445,24 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     borderBottomWidth: 1,
   },
-  passwordInput: {
-    borderBottomWidth: 1,
-    borderColor: "#999",
-    height: 36,
-    padding: 18,
-    fontSize: 20,
-    // marginTop: 16,
-  },
-  propText: {
+  // button: {
+  //   flexDirection: "row",
+  // },
+  // passwordInput: {
+  //   height: 40,
+  //   fontSize: 20,
+  //   borderColor: "#999",
+  //   borderBottomWidth: 1,
+  //   // padding: 20,
+  //   // marginTop: 16,
+  // },
+  subText: {
     fontSize: 14,
     lineHeight: 18,
     marginVertical: 5,
   },
   label: {
-    marginTop: 5,
+    marginTop: 25,
     fontSize: 18,
     fontWeight: "600",
     color: "#483c3c",

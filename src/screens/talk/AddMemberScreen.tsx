@@ -36,7 +36,6 @@ export const AddMemberScreen = ({ navigation }: Props): JSX.Element => {
         const usersResults: User[] = [];
         snapshot.forEach((doc) => {
           const {
-            id,
             email,
             coverPicture,
             createdAt,

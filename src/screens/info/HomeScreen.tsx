@@ -22,6 +22,7 @@ export const HomeScreen = ({ navigation }: Props) => {
   const ADMIN = process.env.EXPO_PUBLIC_ADMIN_A;
   const [infos, setInfos] = useState<Info[]>([]);
   const { setUsers } = useContext(UsersContext);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (auth.currentUser === null) {
