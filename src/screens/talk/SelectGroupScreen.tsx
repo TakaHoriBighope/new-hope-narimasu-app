@@ -7,15 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import {
-  DocumentData,
-  Query,
-  getDocs,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../../config";
 /** components */
 import { ChannelDisplay } from "@/src/components/listitem/ChannelDisplay";
@@ -33,6 +25,9 @@ type Props = {
 };
 
 export const SelectGroupScreen = ({ navigation, route }: Props) => {
+  const [channels, setChannels] = useState<Channel[]>([]);
+  // const { setChannel } = useContext(ChannelContext);
+
   useEffect(() => {
     navigation.setOptions({
       title: "Select Group",
@@ -42,8 +37,6 @@ export const SelectGroupScreen = ({ navigation, route }: Props) => {
       headerRight: () => undefined,
     });
   }, []);
-  // const { setChannel } = useContext(ChannelContext);
-  const [channels, setChannels] = useState<Channel[]>([]);
 
   useEffect(() => {
     const q = query(collection(db, "channels"), orderBy("channelName"));

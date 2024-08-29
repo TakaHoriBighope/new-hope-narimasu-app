@@ -239,7 +239,8 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
             })
             .catch((error) => {
               const { code, message } = error;
-              console.log(code, message);
+              Alert.alert(message);
+              //console.log(code, message);
             });
           //２．channels.channelMemberのuidを削除する
           for (let i = 0; i < channels.length; i++) {
@@ -254,7 +255,7 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
               })
               .catch((error) => {
                 const { code, message } = error;
-                console.log(code, message);
+                Alert.alert(message);
               });
           }
           //3．usersのuidを削除する
@@ -272,21 +273,21 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
                       .catch((error) => {
                         // An error ocurred
                         const { code, message } = error;
-                        console.log(code, message);
+                        Alert.alert(message);
                       });
                     // User re-authenticated.
                   })
                   .catch((error) => {
                     // An error ocurred
                     const { code, message } = error;
-                    console.log(code, message);
+                    Alert.alert(message);
                   });
               }
             })
             .catch((error) => {
               // An error ocurred
               const { code, message } = error;
-              console.log(code, message);
+              Alert.alert(message);
             });
         },
       },
@@ -301,112 +302,113 @@ export const SettingsScreen = ({ navigation }: Props): JSX.Element => {
   //Androidでは<KeyboardAvoidingView></KeyboardAvoidingView>でラップしない
   //SettingsScreenが正常に表示しない
   return (
-    <ScrollView keyboardDismissMode="on-drag">
-      <KeyboardAvoidingView style={styles.container}>
-        <View style={styles.boxContainer}>
-          <Text style={styles.username}>User: {user?.username}</Text>
-          <Text style={styles.email}>{user?.email}</Text>
-
-          <View style={styles.photoContainer}>
-            {user?.profilePicture ? (
-              <TouchableOpacity
-                onPress={() => {
-                  onPressProfilePicture();
-                  setImageURL(imageURL);
-                }}
-              >
-                <Image
-                  style={styles.image}
-                  source={{ uri: user?.profilePicture }}
-                />
-                <View style={styles.buffer}></View>
-              </TouchableOpacity>
-            ) : (
-              <Octicons
-                name="feed-person"
-                size={80}
-                color="gray"
-                style={styles.avatar}
-                onPress={() => {
-                  onPressProfilePicture();
-                  setImageURL(imageURL);
-                }}
-              />
-            )}
-            {!!imageURL && (
-              <Image source={{ uri: imageURL }} style={styles.image} />
-            )}
-            <Text style={styles.label}>Change your Profile Picture?</Text>
-            <Text style={styles.subText}>Click green circle.</Text>
-          </View>
-          <View>
-            {!!imageURL ? (
-              <FloatingButton
-                onPress={onPressPhotoSave}
-                style={{ position: "absolute", right: -150, top: -140 }}
-              >
-                <AntDesign name="save" size={20} color="white" />
-              </FloatingButton>
-            ) : null}
-          </View>
-
-          <Text style={styles.label}>Create Talk-Group-Name</Text>
-          <Text style={styles.subText}>
-            You are the proposer of the new group.
-          </Text>
-          <TextInput
-            value={groupName}
-            style={styles.input}
-            numberOfLines={1}
-            placeholder="input new group name"
-            onChangeText={(text) => setGroupName(text)}
-            onContentSizeChange={() => {
-              onContentSizeChange();
-            }}
-          />
-          <View>
-            {!!groupName ? (
-              <FloatingButton
-                onPress={onSubmitCreateNewGroup}
-                // label="save"
-                style={{ position: "absolute", right: -150, bottom: 5 }}
-              >
-                <AntDesign name="save" size={20} color="white" />
-              </FloatingButton>
-            ) : null}
-          </View>
-          <Text style={styles.label}>Account Deletion</Text>
-          <TextInput
-            value={password}
-            style={styles.input}
-            numberOfLines={1}
-            // maxLength={10}
-            placeholder="input your passoword"
-            autoCapitalize="none"
-            secureTextEntry
-            textContentType="password"
-            // autoFocus
-            onChangeText={(text) => {
-              setPassword(text);
-              passwordCheck(text);
-            }}
-            onContentSizeChange={() => {
-              onContentSizeChange();
-            }}
-          />
-          <View>
-            {!!password ? (
-              <FloatingButton
-                onPress={() => onPressDeleteAccount(password)}
-                style={{ position: "absolute", right: -150, bottom: 20 }}
-              >
-                <AntDesign name="enter" size={20} color="white" />
-              </FloatingButton>
-            ) : null}
-          </View>
+    <ScrollView keyboardDismissMode="on-drag" style={styles.container}>
+      {/* <KeyboardAvoidingView style={styles.container}> */}
+      <View style={styles.boxContainer}>
+        <Text style={styles.label}>Create Talk-Group-Name</Text>
+        <Text style={styles.subText}>
+          You are the proposer of the new group.
+        </Text>
+        <TextInput
+          value={groupName}
+          style={styles.input}
+          numberOfLines={1}
+          placeholder="input new group name"
+          onChangeText={(text) => setGroupName(text)}
+          onContentSizeChange={() => {
+            onContentSizeChange();
+          }}
+        />
+        <View>
+          {!!groupName ? (
+            <FloatingButton
+              onPress={onSubmitCreateNewGroup}
+              // label="save"
+              style={{ position: "absolute", right: -150, bottom: 5 }}
+            >
+              <AntDesign name="save" size={20} color="white" />
+            </FloatingButton>
+          ) : null}
         </View>
-        <Loading visible={loading} />
-      </KeyboardAvoidingView>
+        <Text style={styles.label}>Account Deletion</Text>
+        <TextInput
+          value={password}
+          style={styles.input}
+          numberOfLines={1}
+          // maxLength={10}
+          placeholder="input your passoword"
+          autoCapitalize="none"
+          secureTextEntry
+          textContentType="password"
+          // autoFocus
+          onChangeText={(text) => {
+            setPassword(text);
+            passwordCheck(text);
+          }}
+          onContentSizeChange={() => {
+            onContentSizeChange();
+          }}
+        />
+        <View>
+          {!!password ? (
+            <FloatingButton
+              onPress={() => onPressDeleteAccount(password)}
+              style={{ position: "absolute", right: -150, bottom: 20 }}
+            >
+              <AntDesign name="enter" size={20} color="white" />
+            </FloatingButton>
+          ) : null}
+        </View>
+      </View>
+
+      <View style={styles.boxContainer}>
+        <Text style={styles.username}>User: {user?.username}</Text>
+        <Text style={styles.email}>{user?.email}</Text>
+        <View style={styles.photoContainer}>
+          {user?.profilePicture ? (
+            <TouchableOpacity
+              onPress={() => {
+                onPressProfilePicture();
+                setImageURL(imageURL);
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={{ uri: user?.profilePicture }}
+              />
+              <View style={styles.buffer}></View>
+            </TouchableOpacity>
+          ) : (
+            <Octicons
+              name="feed-person"
+              size={80}
+              color="gray"
+              style={styles.avatar}
+              onPress={() => {
+                onPressProfilePicture();
+                setImageURL(imageURL);
+              }}
+            />
+          )}
+          {!!imageURL && (
+            <Image source={{ uri: imageURL }} style={styles.image} />
+          )}
+          <Text style={styles.label}>Change your Profile Picture?</Text>
+          <Text style={styles.subText}>Click green circle.</Text>
+        </View>
+        <View>
+          {!!imageURL ? (
+            <FloatingButton
+              onPress={onPressPhotoSave}
+              style={{ position: "absolute", right: -150, top: -140 }}
+            >
+              <AntDesign name="save" size={20} color="white" />
+            </FloatingButton>
+          ) : null}
+        </View>
+      </View>
+      <Loading visible={loading} />
+      {/* </KeyboardAvoidingView> */}
     </ScrollView>
   );
 };
@@ -420,7 +422,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   username: {
-    marginTop: 10,
+    marginTop: 30,
     marginLeft: 5,
     fontSize: 18,
     lineHeight: 24,
@@ -436,17 +438,6 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     borderBottomWidth: 1,
   },
-  // button: {
-  //   flexDirection: "row",
-  // },
-  // passwordInput: {
-  //   height: 40,
-  //   fontSize: 20,
-  //   borderColor: "#999",
-  //   borderBottomWidth: 1,
-  //   // padding: 20,
-  //   // marginTop: 16,
-  // },
   subText: {
     fontSize: 14,
     lineHeight: 18,
@@ -458,13 +449,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#483c3c",
   },
-  // text: {
-  //   fontSize: 18,
-  //   lineHeight: 24,
-  //   fontWeight: "600",
-  //   margin: 5,
-  //   color: "rgba(0, 0, 0, 0.7)",
-  // },
   photoContainer: {
     alignItems: "center",
   },
