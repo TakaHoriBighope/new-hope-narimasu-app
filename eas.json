@@ -1,0 +1,24 @@
+{
+  "build": {
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_FB_API_KEY": "AIzaSyByslv11O4zvcWkaOHGKxRD1BAkk6Zu67A",
+        "EXPO_PUBLIC_FB_AUTH_DOMAIN": "new-hope-narimasu3.firebaseapp.com",
+        "EXPO_PUBLIC_FB_PROJECT_ID": "new-hope-narimasu3",
+        "EXPO_PUBLIC_FB_STORAGE_BUCKET": "new-hope-narimasu3.appspot.com",
+        "EXPO_PUBLIC_FB_MESSAGING_SENDER_ID": "622188856393",
+        "EXPO_PUBLIC_FB_APP_ID": "1:622188856393:web:c0dd3ef0282d057380eb98",
+        "EXPO_PUBLIC_ADMIN_A": "[CcKjYgH9VZa7gtnRg15C2U79d1M2,xh24E8XDhpR3HekdZNmRFpyC8Iu1]"
+      }
+    },
+    "preview": {
+      "extends": "production",
+      "ios": {
+        "simulator": true
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    }
+  }
+}

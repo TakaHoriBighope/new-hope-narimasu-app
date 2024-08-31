@@ -4,6 +4,7 @@ import { type Message } from "../../types/message";
 import { Timestamp } from "firebase/firestore";
 import { Octicons } from "@expo/vector-icons";
 import { ChannelContext } from "@/src/contexts/channelContext";
+import { UsersContext } from "@/src/contexts/usersContext";
 // import Balloon from "react-native-balloon";
 
 // type Props = {
@@ -17,7 +18,7 @@ type Props = {
 const MessageListItem = (props: Props): JSX.Element | null => {
   const { message } = props;
   const { talk, createdAt, uid, profilePicture, username, email } = message;
-  const { channel } = React.useContext(ChannelContext);
+  const { users } = React.useContext(UsersContext);
   if (talk === null || createdAt === null) {
     return null;
   }
@@ -26,35 +27,35 @@ const MessageListItem = (props: Props): JSX.Element | null => {
 
   return (
     <>
-      {/* {channel?.channelMember.includes(uid ?? "") ? ( */}
-      <View style={styles.msgListItem}>
-        <View style={styles.itemContainer}>
-          <View style={styles.leftContainer}>
-            {profilePicture ? (
-              <Image
-                style={styles.imageContainer}
-                source={{ uri: profilePicture }}
-                // contenFit="cover"
-              />
-            ) : (
-              <Octicons
-                name="feed-person"
-                size={36}
-                color="lightgray"
-                style={styles.avatar}
-              />
-            )}
-          </View>
-          <View style={styles.rightContainer}>
-            <View style={styles.message}>
-              <Text style={styles.nameText}>{username}</Text>
-              <Text style={styles.dateText}>{dateAry[0]}</Text>
+      {users?.includes(uid ?? "") ? (
+        <View style={styles.msgListItem}>
+          <View style={styles.itemContainer}>
+            <View style={styles.leftContainer}>
+              {profilePicture ? (
+                <Image
+                  style={styles.imageContainer}
+                  source={{ uri: profilePicture }}
+                  // contenFit="cover"
+                />
+              ) : (
+                <Octicons
+                  name="feed-person"
+                  size={36}
+                  color="lightgray"
+                  style={styles.avatar}
+                />
+              )}
             </View>
-            <Text style={styles.messageText}>{talk}</Text>
+            <View style={styles.rightContainer}>
+              <View style={styles.message}>
+                <Text style={styles.nameText}>{username}</Text>
+                <Text style={styles.dateText}>{dateAry[0]}</Text>
+              </View>
+              <Text style={styles.messageText}>{talk}</Text>
+            </View>
           </View>
         </View>
-      </View>
-      {/* ) : null} */}
+      ) : null}
     </>
   );
 };

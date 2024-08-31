@@ -17,7 +17,7 @@ import { type Message } from "./src/types/message";
 import { LogBox } from "react-native";
 
 export default function App() {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<string[]>([]);
   const [user, setUser] = useState<User | null | undefined>();
   const [infos, setInfos] = useState<Info[]>([]);
   const [info, setInfo] = useState<Info | null | undefined>();

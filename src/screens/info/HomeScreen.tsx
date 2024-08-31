@@ -65,7 +65,7 @@ export const HomeScreen = ({ navigation }: Props) => {
   }, [signOut]);
 
   useEffect(() => {
-    //ログインしているユーザーuidだけをcontextに
+    //サインアップしているユーザーuidだけをcontextに
     const ref = query(collection(db, "users"));
     const unsubscribe = onSnapshot(
       ref,
