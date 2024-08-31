@@ -103,6 +103,9 @@ export const LoginScreen = ({ navigation }: Props): JSX.Element => {
           <Text style={styles.mainTitle}>New Hope</Text>
           <Text style={styles.subTitle}>Narimasu</Text>
         </View>
+        {/* <View style={styles.loadingCenter}>
+          <Text style={styles.loading}>loading....</Text>
+        </View> */}
         <Text style={styles.title}>Log In</Text>
         <TextInput
           style={styles.input}

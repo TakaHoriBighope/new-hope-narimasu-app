@@ -24,5 +24,6 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(252, 252, 252, 0.3)",
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 100,
   },
 });
