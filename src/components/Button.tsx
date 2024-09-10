@@ -7,7 +7,6 @@ import {
 } from "react-native";
 
 type Props = {
-  // onPress: (event: GestureResponderEvent) => void;
   label: string;
   onPress?: () => void;
 };

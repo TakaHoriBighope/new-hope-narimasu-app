@@ -7,6 +7,10 @@ import { Timestamp } from "firebase/firestore";
 //   updatedAt: Timestamp;
 //   createdAt: Timestamp;
 // };
+export type ProfileUser = {
+  uid: string;
+  profilePicture: string;
+};
 
 export type User = {
   id?: string;

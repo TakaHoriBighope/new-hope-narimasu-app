@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, View, Dimensions, StyleSheet } from "react-native";
+import { Image, Dimensions } from "react-native";
 
 interface Props {
   url: string;

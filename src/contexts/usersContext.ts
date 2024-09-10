@@ -1,4 +1,5 @@
 import { createContext } from "react";
+// import { type ProfileUser } from "../types/user";
 
 type UsersContextValue = {
   users: string[];

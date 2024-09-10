@@ -9,7 +9,7 @@ import { ChannelContext } from "./src/contexts/channelContext";
 import { ChannelMemContext } from "./src/contexts/channelMemContext";
 import { MessageContext } from "./src/contexts/messageContext";
 import { UsersContext } from "./src/contexts/usersContext";
-import { type User } from "./src/types/user";
+import { ProfileUser, type User } from "./src/types/user";
 import { type Info } from "./src/types/info";
 import { type Post } from "./src/types/post";
 import { type Channel } from "./src/types/channel";

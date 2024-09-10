@@ -4,7 +4,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import Icon from "@/src/components/Icon";
 import { RootStackParamList } from "../../types/navigation";
 import { type Info } from "../../types/info";
-import { type User } from "../../types/user";
+import { type ProfileUser } from "../../types/user";
 import { auth, db } from "../../config";
 import FloatingButton from "../../components/FloatingButton";
 // import { UserContext } from "../../contexts/userContext";
