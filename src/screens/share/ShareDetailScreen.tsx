@@ -19,7 +19,7 @@ type Props = {
 
 export const ShareDetailScreen = ({ navigation, route }: Props) => {
   const { post } = route.params;
-  const [postSingle, setpostSingle] = useState<Post | null>(null);
+  const [postSingle, setPostSingle] = useState<Post | null>(null);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const ShareDetailScreen = ({ navigation, route }: Props) => {
     const unsubscribe = onSnapshot(
       ref,
       (postDoc) => {
-        setpostSingle({
+        setPostSingle({
           id: postDoc.id,
           desc: postDoc.data()?.desc,
           imgURL: postDoc.data()?.imgURL,

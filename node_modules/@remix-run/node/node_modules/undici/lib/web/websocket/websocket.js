@@ -28,8 +28,6 @@ const { types } = require('node:util')
 const { ErrorEvent, CloseEvent } = require('./events')
 const { SendQueue } = require('./sender')
 
-let experimentalWarned = false
-
 // https://websockets.spec.whatwg.org/#interface-definition
 class WebSocket extends EventTarget {
   #events = {
@@ -53,15 +51,10 @@ class WebSocket extends EventTarget {
   constructor (url, protocols = []) {
     super()
 
+    webidl.util.markAsUncloneable(this)
+
     const prefix = 'WebSocket constructor'
     webidl.argumentLengthCheck(arguments, 1, prefix)
-
-    if (!experimentalWarned) {
-      experimentalWarned = true
-      process.emitWarning('WebSockets are experimental, expect them to change at any time.', {
-        code: 'UNDICI-WS'
-      })
-    }
 
     const options = webidl.converters['DOMString or sequence<DOMString> or WebSocketInit'](protocols, prefix, 'options')
 
